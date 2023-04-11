@@ -33,11 +33,11 @@ def evaluate_model(args):
     model.load_state_dict(torch.load(args.ckpt_path))
     print(f'Checkpoint loaded successfully: {args.ckpt_path}')
 
-    spelling_corrector = pipeline('text2text-generation', model=model, tokenizer=tokenizer, max_length=args.max_length)
+    spellchecker = pipeline('text2text-generation', model=model, tokenizer=tokenizer, max_length=args.max_length)
 
     while True:    
         query = input("Search query:")
-        result = spelling_corrector(query)
+        result = spellchecker(query)
         print(f'Corrected query: {result[0]["generated_text"]}')
 
 
