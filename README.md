@@ -1,6 +1,9 @@
-# spelling-correction
-This repo finetunes an HuggingFace Seq2SeqLM model for spelling correction. This is a work in progress. 
+# Spell Checker with Transformers
+This repo use HuggingFace to finetune a Seq2SeqLM transformer model for spelling correction. 
 
+This is a work in progress. 
+
+## Usage
 First, generate a spelling-correction dataset from a text file that contains samples without spelling errors:
 
     ```
