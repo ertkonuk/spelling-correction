@@ -17,6 +17,9 @@ def parse_args():
     return args
 
 def process(args):
+    
+    assert args.train_size + args.val_size + args.test_size == 1.0
+
     # Load the English data
     data_en = load_english_data(args.file_path)
 
