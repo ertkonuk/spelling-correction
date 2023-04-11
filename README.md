@@ -1,6 +1,16 @@
 # spelling-correction
-Finetune Bart model for spelling correction
+This repo finetunes an HuggingFace Seq2SeqLM model for spelling correction. This is a work in progress. 
 
+First, generate a spelling-correction dataset from a text file that contains samples without spelling errors:
+
+    ```
+    python generate_data.py \
+            --file-path ./data.json \
+            --output-dir ./output \
+            --max-length 16 \
+            --error-rate 0.98
+    ```
+    
 To finetune a pretrained model:
 
     ```
