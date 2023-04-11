@@ -8,7 +8,6 @@ from dataset import SpellingCorrectionDataset
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
-
 def parse_args():
     parser = argparse.ArgumentParser(description='Finetune a Hugging Face model for spelling correction.')
     parser.add_argument('--train-data', type=str,  default='./train_data.json',   help='Full path for training data')
@@ -85,7 +84,6 @@ def train(args):
     	torch_compile=args.torch_compile, # optimizations
         optim=args.optimizer, # improved optimizer    
     )    
-
 
     trainer = Trainer(
         model=model,
