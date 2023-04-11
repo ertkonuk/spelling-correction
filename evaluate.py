@@ -23,19 +23,22 @@ def parse_args():
 
 def evaluate_model(args):
     # Load test_data
-    print('saldlsad')
+
     tokenizer = AutoTokenizer.from_pretrained(args.tokenizer, use_fast=True)
 
     model = AutoModelForSeq2SeqLM.from_pretrained(args.model)
     print(f"Number of parameters: {model.num_parameters():,}")
 
+    # Load the checkpoint
+    model.load_state_dict(torch.load(args.ckpt_path))
+    print(f'Checkpoint loaded successfully: {args.ckpt_path}')
+
     spelling_corrector = pipeline('text2text-generation', model=model, tokenizer=tokenizer, max_length=args.max_length)
 
-    #while True:
-    
-    query = input("Search query:")
-    result = spelling_corrector(query)
-    print(f'Corrected query: {result["generated_text"]}')
+    while True:    
+        query = input("Search query:")
+        result = spelling_corrector(query)
+        print(f'Corrected query: {result[0]["generated_text"]}')
 
 
 if __name__ == "__main__":
