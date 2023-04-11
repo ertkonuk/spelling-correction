@@ -7,6 +7,7 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from langdetect import detect
 from sklearn.model_selection import train_test_split
+import re
 
 nltk.download('stopwords')
 

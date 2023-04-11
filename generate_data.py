@@ -1,8 +1,8 @@
 import argparse
-from .utils import *
+from utils import *
 
 def parse_args():
-    parser = argparse.ArgumentParser(description='Finetune a Hugging Face model for spelling correction.')
+    parser = argparse.ArgumentParser(description='Generate dataset for spelling correction training (finetuning).')
     parser.add_argument('--file-path', type=str,  default='./data',   help='Root directory for data')
     parser.add_argument('--max-length', type=int,  default=16,   help='Maximum context length')
     parser.add_argument('--error-rate', type=float,  default=0.98,   help='Error rate of spelling mistakes in the dataset')
@@ -37,6 +37,6 @@ def process(args):
     save_data_to_file(val_data, 'val_data.json')
 
     
-if __file__ == "__main__":
+if __name__ == "__main__":
     args = parse_args()
     process(args)

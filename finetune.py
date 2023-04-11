@@ -3,8 +3,8 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, TrainingArguments
 import os
 import argparse
 import torch
-from .utils import load_data_from_file, freeze_params
-from .dataset import SpellingCorrectionDataset
+from utils import load_data_from_file, freeze_params
+from dataset import SpellingCorrectionDataset
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
@@ -46,11 +46,12 @@ def train(args):
 
     tokenizer = AutoTokenizer.from_pretrained(args.tokenizer, use_fast=True)
 
-    max_length = 16
     train_data = SpellingCorrectionDataset(train_pairs, tokenizer, max_length=args.max_length)
     val_data   = SpellingCorrectionDataset(val_pairs  , tokenizer, max_length=args.max_length)
 
     model = AutoModelForSeq2SeqLM.from_pretrained(args.model)
+
+    print(f"Number of parameters: {model.num_parameters():,}")
 
     # Data collator for Seq2Seq tasks: shifts the decoder input to the right by one position
     seq2seq_data_collator = DataCollatorForSeq2Seq(tokenizer, model=model)
@@ -98,6 +99,6 @@ def train(args):
     # Fine-tune the model
     trainer.train()
 
-if __file__ == "__main__":
+if __name__ == "__main__":
     args = parse_args()
     train(args)
