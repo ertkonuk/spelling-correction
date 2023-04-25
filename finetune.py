@@ -30,6 +30,7 @@ def parse_args():
     parser.add_argument('--freeze-encoder', help='Freeze the encoder', action='store_true')
     parser.add_argument('--freeze-decoder', help='Freeze the decoder', action='store_true')
     parser.add_argument('--torch-compile', help='Compile the model (only in PyTorch 2.0 and above)', action='store_true')
+    parser.add_argument('--fp16', help='Use fp16 training', action='store_true')
     parser.add_argument('--bf16', help='Use bf16 training', action='store_true')
 
 
@@ -79,6 +80,7 @@ def train(args):
         disable_tqdm=False,
         learning_rate=args.lr,
         lr_scheduler_type=args.lr_scheduler_type,
+        fp16=args.fp16, # fp16 training
         # PyTorch 2.0 specifics
         bf16=args.bf16, # bfloat16 training
     	torch_compile=args.torch_compile, 
