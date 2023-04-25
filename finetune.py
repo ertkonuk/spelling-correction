@@ -81,8 +81,8 @@ def train(args):
         lr_scheduler_type=args.lr_scheduler_type,
         # PyTorch 2.0 specifics
         bf16=args.bf16, # bfloat16 training
-    	torch_compile=args.torch_compile, # optimizations
-        optim=args.optimizer, # improved optimizer    
+    	torch_compile=args.torch_compile, 
+        optim=args.optimizer, 
     )    
 
     trainer = Trainer(
